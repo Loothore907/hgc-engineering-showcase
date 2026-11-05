@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://homegrowncannalytics.com/schemas/v1/offer-observation.schema.json",
+  "title": "OfferObservation",
+  "description": "An immutable, evidence-backed report of a retailer offer claim.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "observation_id",
+    "location_id",
+    "occasion",
+    "availability_claim",
+    "claim_text",
+    "source",
+    "observed_at",
+    "verification"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "observation_id": { "type": "string", "minLength": 1 },
+    "location_id": { "type": "string", "minLength": 1 },
+    "occasion": {
+      "type": "string",
+      "enum": ["birthday", "daily", "weekly", "holiday", "event", "other"]
+    },
+    "availability_claim": {
+      "type": "string",
+      "enum": ["offer_available", "no_offer", "unknown"]
+    },
+    "claim_text": { "type": "string", "minLength": 1 },
+    "notes": { "type": ["string", "null"] },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "retailer_website",
+            "retailer_menu",
+            "retailer_social",
+            "printed_material",
+            "retailer_employee",
+            "customer_report",
+            "direct_redemption",
+            "other"
+          ]
+        },
+        "name": { "type": ["string", "null"] },
+        "uri": { "type": ["string", "null"], "format": "uri" },
+        "captured_by": { "type": ["string", "null"] }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "reference"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["image", "document", "web_archive", "receipt", "note", "other"]
+          },
+          "reference": { "type": "string", "minLength": 1 },
+          "sha256": { "type": ["string", "null"], "pattern": "^[a-fA-F0-9]{64}$" }
+        }
+      },
+      "default": []
+    },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "applicable_on": { "type": ["string", "null"], "format": "date" },
+    "verification": {
+      "type": "object",
+      "description": "Evidence classification. retailer_reported records an attributable retailer claim; it does not mean Homegrown independently verified or redeemed the offer. The legacy verified_by and verified_at fields are reserved for independent field observations and direct redemptions.",
+      "additionalProperties": false,
+      "required": ["status", "confidence"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["unverified", "corroborated", "retailer_reported", "redeemed", "disputed", "expired"]
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "verified_by": { "type": ["string", "null"] },
+        "verified_at": { "type": ["string", "null"], "format": "date-time" },
+        "supersedes_observation_id": { "type": ["string", "null"] }
+      }
+    }
+  }
+}
+

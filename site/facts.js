@@ -1,0 +1,178 @@
+window.HGC_DATA = {
+  "schema_version": "hgc-showcase-bridge-view/2",
+  "purpose": "Public engineering showcase; source lineage and separately attributed owner deal validation.",
+  "deal_validation": {
+    "status": "current_known_valid_per_owner",
+    "last_validated_month": "2026-08",
+    "reported_at": "2026-11-05",
+    "source": "HGC owner",
+    "scope": "birthday deal list",
+    "independent_current_check": "not_performed",
+    "context": "The owner confirms these are current known valid deals, last validated August 2026. Nearly all were unchanged from the prior year, and many known personally to the owner have been unchanged for years. The owner expects an update would mainly add deals; shop changes or license revocation can affect availability."
+  },
+  "reviewed_at": "2026-11-05",
+  "rights_status": "all_rights_reserved",
+  "sources": {
+    "directory": {
+      "file": "license-directory.json",
+      "schemaVersion": "hgc-license-directory/1",
+      "exportedAt": "2026-01-20T22:08:04.28371Z",
+      "capturedAt": "2026-10-24T22:43:30.909Z",
+      "sha256": "df30ccfe0bf959d51a1a04e293540f63d794b813c5702e44f8d8959ab328d339",
+      "upstream_hash": "65bd5e713d510b735fec38ca54b4286020bd92b875154028f593d4f7a69b9a54"
+    },
+    "birthday": {
+      "file": "birthday-public.json",
+      "schema_version": "1.0.0",
+      "catalog_id": "anchorage-birthday-2026-08-17-public",
+      "generated_at": "2026-07-26T09:44:04.758552-08:00",
+      "sha256": "e1a74f959a6cd8bf307f847c1312f0ee1086752c35fc98278a7e707f79e46e65"
+    }
+  },
+  "metrics": {
+    "directory_rows": 540,
+    "directory_reported_rejected_count": 18,
+    "birthday_rows": 41,
+    "directory_missing_license_keys": 0,
+    "birthday_missing_license_keys": 0,
+    "directory_duplicate_license_keys": 0,
+    "birthday_duplicate_license_keys": 0,
+    "birthday_joined_rows": 41,
+    "birthday_unmatched_rows": 0,
+    "directory_not_in_birthday": 499,
+    "explicit_scope_rows": 20,
+    "sample_rows": 6,
+    "scope_counts": {
+      "group_wide": 11,
+      "per_location": 9,
+      "unknown": 21
+    }
+  },
+  "selection": {
+    "method": "First six source-order birthday rows with explicit per_location or group_wide scope; exact unique license-number join to directory.",
+    "sample_is_representative": false,
+    "unknown_scope_rows_not_in_sample": 21
+  },
+  "adapter_evidence": {
+    "file": "packages/homegrown-adapter/license-seed.ts",
+    "function": "licenseSeedDirectory",
+    "observed_behavior": [
+      "Checks raw version v2 and tenant_count consistency.",
+      "SHA-256 hashes original JSON string and preserves exported_at, source_run_id, reference and capturedAt.",
+      "Rejects non-AK, explicitly manual-verification, invalid overlay and future-dated records.",
+      "Removes all records with duplicate tenant IDs or license numbers; counts rejects.",
+      "Projects dba_name, formatted_address, coordinates and raw license fields, excluding contacts and raw notes.",
+      "Marks every retained location historical_snapshot; geocoded_at without timezone is not promoted to physical-verification evidence."
+    ],
+    "reuse_boundary": "Reuses the existing projection and evidence contract. This review adds an allowlisted birthday/license join; it does not run provider enrichment, routing or publishing."
+  },
+  "exclusions": [
+    "All coordinates, geometry and provider-derived output",
+    "All street addresses: birthday-address upstream lineage is unresolved",
+    "Menus, shopping, navigation, logos and artwork",
+    "Personal contacts, private notes, credentials and partnerships"
+  ],
+  "unknowns": [
+    "No row-level claim observation or verification date in the birthday export.",
+    "Export, generated and capture timestamps describe file lineage, not deal validation or expiry.",
+    "The catalog identifier is not evidence of offer effective dates.",
+    "Source publication_eligible is not permission for a new public release.",
+    "The 18 rejected directory records are a reported count; individual reject reasons were not reviewed.",
+    "The selected six rows are a non-representative explicit-scope sample; 21 unknown-scope records remain in coverage."
+  ],
+  "uncertainty_example": {
+    "source": "birthday-public.json locations[0]",
+    "location_id": "ak-retail-10866",
+    "license_number": "10866",
+    "observed_redemption_scope": "unknown",
+    "observed_redemption_group_id": null,
+    "decision": "Redemption scope is not inferred; omitted from the explicit-scope sample. Unknown scope does not mean the deal is invalid."
+  },
+  "rows": [
+    {
+      "location_id": "ak-retail-11614",
+      "license_number": "11614",
+      "public_name": "AK JOINT",
+      "observed_claim_text": ".5 preroll for 1 USD",
+      "observed_redemption_scope": "per_location",
+      "redemption_group_id": "ak-joint-voodoo-high-country-birthday-2026",
+      "observed_publication_eligible": true,
+      "observed_license_type": "Retail Marijuana Store",
+      "observed_license_status": "Active-Operating",
+      "license_evidence_class": "historical_snapshot",
+      "license_source_version": "v2:2026-01-20T22:08:04.283710Z:20260112_213750",
+      "claim_text_sha256": "784c7014d0257fe4afef25d57202c38d566b4ed2526eba886033ae016357bed8"
+    },
+    {
+      "location_id": "ak-retail-10236",
+      "license_number": "10236",
+      "public_name": "Cannabaska",
+      "observed_claim_text": "1 gram pre-roll for 1.05 OR .5g pre-roll for a penny. must have an account. can only redeem at 1 location",
+      "observed_redemption_scope": "group_wide",
+      "redemption_group_id": "cannabaska-birthday-2026",
+      "observed_publication_eligible": true,
+      "observed_license_type": "Retail Marijuana Store",
+      "observed_license_status": "Active-Operating",
+      "license_evidence_class": "historical_snapshot",
+      "license_source_version": "v2:2026-01-20T22:08:04.283710Z:20260112_213750",
+      "claim_text_sha256": "6f692cdc67c3cbfea4a987c373d844d4dd61dd1045bfc92a6ddcd75086da90f0"
+    },
+    {
+      "location_id": "ak-retail-10254",
+      "license_number": "10254",
+      "public_name": "Cannabaska",
+      "observed_claim_text": "1 gram pre-roll for 1.05 OR .5g pre-roll for a penny. must have an account. can only redeem at 1 location",
+      "observed_redemption_scope": "group_wide",
+      "redemption_group_id": "cannabaska-birthday-2026",
+      "observed_publication_eligible": true,
+      "observed_license_type": "Retail Marijuana Store",
+      "observed_license_status": "Active-Operating",
+      "license_evidence_class": "historical_snapshot",
+      "license_source_version": "v2:2026-01-20T22:08:04.283710Z:20260112_213750",
+      "claim_text_sha256": "6f692cdc67c3cbfea4a987c373d844d4dd61dd1045bfc92a6ddcd75086da90f0"
+    },
+    {
+      "location_id": "ak-retail-23821",
+      "license_number": "23821",
+      "public_name": "Catalyst Cannabis Company - Muldoon",
+      "observed_claim_text": "Any 1g pre-roll for a penny",
+      "observed_redemption_scope": "group_wide",
+      "redemption_group_id": "catalyst-birthday-2026",
+      "observed_publication_eligible": true,
+      "observed_license_type": "Retail Marijuana Store",
+      "observed_license_status": "Active-Operating",
+      "license_evidence_class": "historical_snapshot",
+      "license_source_version": "v2:2026-01-20T22:08:04.283710Z:20260112_213750",
+      "claim_text_sha256": "283afa7604f42077dc411dd62c70c4c5f3672837874309a02088a5c00dec5a31"
+    },
+    {
+      "location_id": "ak-retail-31417",
+      "license_number": "31417",
+      "public_name": "Catalyst Cannabis Company - Northern Lights",
+      "observed_claim_text": "Any 1g pre-roll for a penny",
+      "observed_redemption_scope": "group_wide",
+      "redemption_group_id": "catalyst-birthday-2026",
+      "observed_publication_eligible": true,
+      "observed_license_type": "Retail Marijuana Store",
+      "observed_license_status": "Active-Operating",
+      "license_evidence_class": "historical_snapshot",
+      "license_source_version": "v2:2026-01-20T22:08:04.283710Z:20260112_213750",
+      "claim_text_sha256": "283afa7604f42077dc411dd62c70c4c5f3672837874309a02088a5c00dec5a31"
+    },
+    {
+      "location_id": "ak-retail-11638",
+      "license_number": "11638",
+      "public_name": "Catalyst Cannabis Company - Old Seward",
+      "observed_claim_text": "Any 1g pre-roll for a penny",
+      "observed_redemption_scope": "group_wide",
+      "redemption_group_id": "catalyst-birthday-2026",
+      "observed_publication_eligible": true,
+      "observed_license_type": "Retail Marijuana Store",
+      "observed_license_status": "Active-Operating",
+      "license_evidence_class": "historical_snapshot",
+      "license_source_version": "v2:2026-01-20T22:08:04.283710Z:20260112_213750",
+      "claim_text_sha256": "283afa7604f42077dc411dd62c70c4c5f3672837874309a02088a5c00dec5a31"
+    }
+  ],
+  "source_review_sha256": "39cf623fcc38e4364c7b69d73b8073592a68b45ca0336825b234ae0c006584b7"
+};
